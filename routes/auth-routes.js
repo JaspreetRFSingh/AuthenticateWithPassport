@@ -20,9 +20,7 @@ router.get('/failure', (req, res) => {
 
 router.get('/google/oauth2callback', passport.authenticate('google', { successRedirect: '/auth/success', failureRedirect: '/auth/failure' }) , function (req, res) {res.redirect('/');} );
 
-//router.get('/google/oauth2callback', passport.authenticate('google', { successRedirect: '/auth/success', failureRedirect: '/auth/failure' }) , function (req, res) {res.redirect('/');} );
-
 router.get('/google', passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/plus.login']}),function (req, res){ });
+    scope: ['profile']}),function (req, res){ });
 
 module.exports = router;
