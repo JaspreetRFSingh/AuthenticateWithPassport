@@ -4,10 +4,12 @@ const keys = require('./keys');
 const User = require('../models/user-model');
 
 passport.serializeUser((user, done) => {
+    console.log('I just got called.  I serialize a user');
     done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
+    console.log('I just got called.  I deserialize a user');
     User.findById(id).then((user) => {
         done(null, user);
     });
