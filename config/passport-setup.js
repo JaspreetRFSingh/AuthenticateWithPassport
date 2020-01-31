@@ -23,6 +23,7 @@ passport.use(
         callbackURL: '/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
 
+        console.log(profile);
         User.findOne({googleId:profile.id}).then((currentUser)=>{
             if(currentUser){
                 console.log('user is the: ' + currentUser);
@@ -30,7 +31,8 @@ passport.use(
             }else{
                 new User({
                     googleId: profile.id,
-                    username: profile.displayName
+                    username: profile.displayName,
+                    thumbnail: profile._json.picture
                 }).save().then((newUser) => {
                     console.log('new user created: ', newUser);
                     done(null, newUser);
